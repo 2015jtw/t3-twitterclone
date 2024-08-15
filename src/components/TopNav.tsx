@@ -20,7 +20,7 @@ export default function TopNav() {
               router.refresh();
             }}
           />
-          <UserButton>Sign Out</UserButton>
+          <UserButton />
         </SignedIn>
       </div>
     </nav>
