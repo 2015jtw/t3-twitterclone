@@ -7,6 +7,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "./api/uploadthing/core";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Twitter T3 Clone",
@@ -30,6 +31,7 @@ export default function RootLayout({
           </div>
 
           <div id="modal-root" className="text-white" />
+          <Toaster />
         </body>
       </html>
     </ClerkProvider>
