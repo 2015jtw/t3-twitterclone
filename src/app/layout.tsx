@@ -8,6 +8,7 @@ import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "./api/uploadthing/core";
 import { Toaster } from "sonner";
+import { CSPostHogProvider } from "./_analytics/provider";
 
 export const metadata: Metadata = {
   title: "Twitter T3 Clone",
@@ -21,19 +22,21 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode; modal: React.ReactNode }>) {
   return (
     <ClerkProvider>
-      <html lang="en">
-        <body className={`font-sans ${GeistSans.variable} `}>
-          <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
-          <div className="grid h-screen grid-rows-[auto,1fr]">
-            <TopNav />
-            <main className="overflow-y-scroll">{children}</main>
-            {modal}
-          </div>
+      <CSPostHogProvider>
+        <html lang="en">
+          <body className={`font-sans ${GeistSans.variable} `}>
+            <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
+            <div className="grid h-screen grid-rows-[auto,1fr]">
+              <TopNav />
+              <main className="overflow-y-scroll">{children}</main>
+              {modal}
+            </div>
 
-          <div id="modal-root" className="text-white" />
-          <Toaster />
-        </body>
-      </html>
+            <div id="modal-root" className="text-white" />
+            <Toaster />
+          </body>
+        </html>
+      </CSPostHogProvider>
     </ClerkProvider>
   );
 }
